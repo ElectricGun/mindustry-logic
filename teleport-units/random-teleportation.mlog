@@ -1,0 +1,29 @@
+setrate 1000
+ubind @dagger
+sensor enabled switch1 @enabled
+set posi_x 100
+set posi_y 158
+set radius 10
+op rand rand_angle 360 b
+op rand rand_radius radius b
+op cos cos_angle rand_angle b
+op sin sin_angle rand_angle b
+op mul new_pos_x cos_angle rand_radius
+op mul new_pos_y sin_angle rand_radius
+op add new_pos_x new_pos_x posi_x
+op add new_pos_y new_pos_y posi_y
+jump 28 notEqual enabled true
+effect wave new_pos_x new_pos_y 5 %ffa92f 
+effect wave new_pos_x new_pos_y 4 %ffa92f 
+effect wave new_pos_x new_pos_y 3 %ffe3bb 
+effect wave new_pos_x new_pos_y 2 %ffe3bb 
+sensor unit_x @unit @x
+sensor unit_y @unit @y
+effect wave unit_x unit_y 5 %2e8aff 
+effect wave unit_x unit_y 4 %2e8aff 
+effect wave unit_x unit_y 3 %cfe4ff 
+effect wave unit_x unit_y 2 %cfe4ff 
+setprop @x @unit new_pos_x
+setprop @y @unit new_pos_y
+control enabled switch1 0 0 0 0
+end
